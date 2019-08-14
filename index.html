@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="/src/up-and-down.js"></script>
+    <script src="/build/elm.js"></script>
+</head>
+<body>
+
+<h1>Elm</h1>
+
+<div id="elm"></div>
+
+<script>
+    var app = Elm.Main.init({
+        node: document.getElementById('elm')
+    });
+</script>
+
+
+<h1>Vanilla Javascript</h1>
+
+<up-and-down id="js-up-and-down">
+    <div slot="direction-label"><span>Going Nowhere</span></div>
+</up-and-down>
+
+
+<script>
+    $el = document.querySelector("#js-up-and-down");
+    let oldCount = $el.count;
+    $el.addEventListener("countChange", e => {
+        console.log("javascript countChange", e.detail.count, oldCount);
+        const newCount = e.detail.count;
+        const $slot = $el.querySelector("[slot='direction-label']");
+        const $newSlot = $slot.cloneNode(true);
+        const $label = $newSlot.querySelector("div span");
+        if (oldCount > newCount) {
+            $label.innerHTML = "Going down";
+            $el.replaceChild($newSlot, $slot);
+        }
+        else {
+            $label.innerHTML = "Going up";
+            $el.replaceChild($newSlot, $slot);
+        }
+        oldCount = newCount;
+    })
+</script>
+
+</body>
+</html>
