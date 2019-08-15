@@ -5388,11 +5388,6 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 	}
 };
 var elm$html$Html$div = _VirtualDom_node('div');
-var elm$virtual_dom$VirtualDom$node = function (tag) {
-	return _VirtualDom_node(
-		_VirtualDom_noScript(tag));
-};
-var elm$html$Html$node = elm$virtual_dom$VirtualDom$node;
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
 var elm$virtual_dom$VirtualDom$attribute = F2(
@@ -5414,6 +5409,11 @@ var elm$html$Html$Events$on = F2(
 			event,
 			elm$virtual_dom$VirtualDom$Normal(decoder));
 	});
+var elm$virtual_dom$VirtualDom$keyedNode = function (tag) {
+	return _VirtualDom_keyedNode(
+		_VirtualDom_noScript(tag));
+};
+var elm$html$Html$Keyed$node = elm$virtual_dom$VirtualDom$keyedNode;
 var elm$core$List$foldrHelper = F4(
 	function (fn, acc, ctr, ls) {
 		if (!ls.b) {
@@ -5520,7 +5520,7 @@ var author$project$Main$view = function (model) {
 		_List_fromArray(
 			[
 				A3(
-				elm$html$Html$node,
+				elm$html$Html$Keyed$node,
 				'up-and-down',
 				_List_fromArray(
 					[
@@ -5541,7 +5541,11 @@ var author$project$Main$view = function (model) {
 								elm$json$Json$Decode$int)))
 					]),
 				_List_fromArray(
-					[directionSlot]))
+					[
+						_Utils_Tuple2(
+						elm$core$String$fromInt(model.count),
+						directionSlot)
+					]))
 			]));
 };
 var elm$core$Platform$Cmd$batch = _Platform_batch;
@@ -7115,6 +7119,11 @@ var elm$browser$Debugger$History$consMsg = F3(
 				A4(elm$html$Html$Lazy$lazy3, elm$browser$Debugger$History$viewMessage, currentIndex, index, msg),
 				rest));
 	});
+var elm$virtual_dom$VirtualDom$node = function (tag) {
+	return _VirtualDom_node(
+		_VirtualDom_noScript(tag));
+};
+var elm$html$Html$node = elm$virtual_dom$VirtualDom$node;
 var elm$browser$Debugger$History$styles = A3(
 	elm$html$Html$node,
 	'style',
